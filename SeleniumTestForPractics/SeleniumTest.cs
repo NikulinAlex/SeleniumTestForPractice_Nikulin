@@ -95,7 +95,7 @@ public class SeleniumTest
     public void PhoneInputTest()
     {
         var clipboard = new Clipboard();
-        clipboard.SetText("9222290747");
+        clipboard.SetText("+79222290747");
         
         var Avatar = driver.FindElement(By.CssSelector("[data-tid='Avatar']"));
         Avatar.Click();
@@ -111,14 +111,50 @@ public class SeleniumTest
     }
 
     [Test]
-    public void pro()
+    public void NewsInCommunityTest()
     {
+        driver.Navigate().GoToUrl("https://staff-testing.testkontur.ru/communities");
         
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("[data-tid='CommunitiesCounter']")));
+        
+        var myCommunity = driver.FindElements(By.CssSelector("[data-tid='Item']"))[2];
+        myCommunity.Click();
+
+        var firstCommunity = driver.FindElements(By.CssSelector("[data-tid='Link']"))[0];
+        firstCommunity.Click();
+
+        var textModul = driver.FindElement(By.CssSelector("[data-tid='AddButton']"));
+        textModul.Click();
+
+        var textInput = driver.FindElement(By.CssSelector("[class='notranslate public-DraftEditor-content']"));
+        textInput.SendKeys("Hello");
+
+        var enterButtom = driver.FindElement(By.CssSelector("[class='react-ui-j884du react-ui-button-caption']"));
+        enterButtom.Click();
+
+        var testNews = driver.FindElements(By.CssSelector("[data-tid='NewsText']"))[0];
+
+        Assert.That(testNews.Text == "Hello", "Текст в последней новости = " + testNews.Text + " Вместо необходимого Hello");
+        
+        //Почистим новости за собой
+
+        var deleteNews = driver.FindElements(By.CssSelector("[data-tid='PopupMenu__caption']"))[2];
+        deleteNews.Click();
+
+        var deleteButtom = driver.FindElement(By.CssSelector("[data-tid='DeleteRecord']"));
+        deleteButtom.Click();
+            
+        var deleteAccept = driver.FindElement(By.CssSelector("[class='react-ui-aivml8']"));
+        deleteAccept.Click();
     }
+    
+
 
     [TearDown]
     public void TearDown()
     {
+        driver.Close();
         driver.Quit();
     }
 }
