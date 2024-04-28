@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SeleniumTestForPractics")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8dd4bf504b5b1f73335509880c802daecdc77dac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a3cf2d525bd2e7b5a53ccbf930d3e91f25c7b722")]
 [assembly: System.Reflection.AssemblyProductAttribute("SeleniumTestForPractics")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SeleniumTestForPractics")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

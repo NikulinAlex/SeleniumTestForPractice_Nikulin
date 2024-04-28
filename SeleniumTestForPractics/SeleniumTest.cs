@@ -20,16 +20,20 @@ public class SeleniumTest
     [SetUp]
     public void SetUp()
     {
+        SetUpDriver();
         Autorization();
     }
-    
-    public void Autorization()
+
+    public void SetUpDriver()
     {
         var options = new ChromeOptions();
         options.AddArguments("--no-sandbox","--start-maximized", "--disable-extensions");
         
         driver = new ChromeDriver(options);
-        
+    }
+    
+    public void Autorization()
+    {
         driver.Navigate().GoToUrl("https://staff-testing.testkontur.ru");
 
         driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(6);
@@ -106,6 +110,7 @@ public class SeleniumTest
         var phoneInput = driver.FindElements(By.CssSelector("[data-tid='Input']"))[7];
         phoneInput.Click();
         phoneInput.SendKeys(Keys.LeftControl+"v");
+        
         //При вставке из буфера обмена 11-ти значного номера он должен подставляться без кода страны, однако в данном случае номер вставляетя с учетом 7.
         Assert.That(phoneInput.Text == "+7 922 229-07-47", "Указанный телефон = " + phoneInput.Text + " а должен быть +7 922 229-07-47");
     }
